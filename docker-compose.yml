@@ -1,0 +1,12 @@
+services:
+  app:
+    build: .
+    ports:
+      - "5001:5000"
+    volumes:
+      - ./uploads:/app/uploads
+      - .:/app
+      - /app/__pycache__/
+    environment:
+      - GEMINI_API_KEY
+      
