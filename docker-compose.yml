@@ -7,6 +7,7 @@ services:
       - ./uploads:/app/uploads
       - .:/app
       - /app/__pycache__/
+      - ./logs:/logs
     environment:
       - GEMINI_API_KEY
       

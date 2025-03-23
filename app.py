@@ -120,6 +120,11 @@ def upload_file():
         config={'response_mime_type': 'application/json'}
     )
 
+    # レスポンスをテキストファイルに保存
+    with open("/logs/response.txt", "w", encoding="utf-8") as file:
+        file.write(response.text)
+
+
     data_dict = json.loads(response.text)
     print(data_dict)
     # データベースにデータを保存
