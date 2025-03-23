@@ -107,7 +107,8 @@ def upload_file():
     response = client.models.generate_content(
         model="gemini-2.0-flash",
         contents=["""レシートに書いてあることを以下のjsonフォーマットで教えてください。
-                  いかがjsonのフォーマットの例です。いかに指定された要素以外は含めないでください。また、店名は省略せず全て含めてください。
+                  以下がjsonのフォーマットの例です。指定された要素以外は含めないでください。また、店名は省略せず全て含めてください。
+                  必ず以下のフォーマットに従い、"{"で始めて、"}"で閉じてください。
                     {
                         "store_name": "スーパーA",
                         "date": "2022-01-01",
@@ -121,7 +122,7 @@ def upload_file():
     )
 
     # レスポンスをテキストファイルに保存
-    with open("/logs/response.txt", "w", encoding="utf-8") as file:
+    with open("/logs/response.txt", mode='a', encoding="utf-8") as file:
         file.write(response.text)
 
 

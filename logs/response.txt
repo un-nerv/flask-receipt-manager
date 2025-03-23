@@ -1,5 +1,9 @@
 {
-  "store_name": "門前農さんやそう",
-  "date": "2025-03-10",
-  "total_amount": 180
+    "store_name": "ファッションセンターしまむら",
+    "date": "2025-02-03",
+    "total_amount": 1089
+}{
+    "store_name": "駅弁屋 旨囲門",
+    "date": "2025-02-05",
+    "total_amount": 1285
 }
