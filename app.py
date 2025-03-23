@@ -106,7 +106,15 @@ def upload_file():
     #geminiにデータを送信
     response = client.models.generate_content(
         model="gemini-2.0-flash",
-        contents=["レシートに書いてあることを全て教えてください。また、jsonの返答は書いてあるオリジナルの言語で返答してください。",
+        contents=["""レシートに書いてあることを以下のjsonフォーマットで教えてください。
+                  いかがjsonのフォーマットの例です。いかに指定された要素以外は含めないでください。また、店名は省略せず全て含めてください。
+                    {
+                        "store_name": "スーパーA",
+                        "date": "2022-01-01",
+                        "total_amount": 1000
+                    }
+                  
+                  """,
                   types.Part.from_bytes(data=image_bytes, mime_type="image/jpeg")
         ],
         config={'response_mime_type': 'application/json'}
