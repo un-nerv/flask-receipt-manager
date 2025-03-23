@@ -5,7 +5,7 @@ from google.genai import types
 from werkzeug.utils import secure_filename
 import base64
 import sqlite3
-
+import json
 
 
 #google api keyの設定
@@ -120,6 +120,18 @@ def upload_file():
         config={'response_mime_type': 'application/json'}
     )
 
+    data_dict = json.loads(response.text)
+    print(data_dict)
+    # データベースにデータを保存
+    conn = sqlite3.connect("receipts.db")
+    cursor = conn.cursor()
+    cursor.execute("""
+    INSERT INTO receipts (store_name, date, total_amount)
+    VALUES (?, ?, ?)
+    """, (data_dict["store_name"], data_dict["date"], data_dict["total_amount"]))
+    conn.commit()
+    conn.close
+
     flash(response.text)
     return redirect(url_for('home'))
 
@@ -137,6 +149,23 @@ def delete_file(filename):
     except FileNotFoundError:
         return f"File not found: {safe_filename}", 404
     return redirect(url_for('home'))
+
+
+# データベースからデータを取得する関数
+def get_receipts():
+    conn = sqlite3.connect("receipts.db")
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM receipts")
+    receipts = cursor.fetchall()
+    conn.close()
+    return receipts
+
+@app.route('/receipts')
+def show_receipts():
+    receipts = get_receipts()
+    # データを HTML テンプレートに渡す
+    return render_template('receipts.html', receipts=receipts)
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
-

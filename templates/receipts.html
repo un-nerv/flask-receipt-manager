@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Receipts</title>
+</head>
+<body>
+    <h1>Receipts</h1>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Store Name</th>
+            <th>Date</th>
+            <th>Total Amount</th>
+        </tr>
+        {% for receipt in receipts %}
+        <tr>
+            <td>{{ receipt[0] }}</td>
+            <td>{{ receipt[1] }}</td>
+            <td>{{ receipt[2] }}</td>
+            <td>{{ receipt[3] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
