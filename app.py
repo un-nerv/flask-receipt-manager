@@ -45,6 +45,8 @@ def init_db():
     conn.commit()
     conn.close()
 
+init_db()
+
 @app.route("/add", methods=["POST"])
 def add_receipt():
     store_name = request.form["store_name"]
