@@ -1,4 +1,11 @@
 # This is Most powerfull Receipt manager powered by AI
+⚠️This manager app is under development!!!
+
+ Use at your own risk!!!
+
+### Key features
+- Input data from image files
+- delete/insert data manualy
 
 # Install guide
 1. Create .env
