@@ -23,3 +23,6 @@ exit
     docker compose up --build
     ```
 7. Go to http://localhost:5001
+
+### Features will be supported
+- Geocoding store location and send to [Dawarich](https://github.com/Freika/dawarich)
