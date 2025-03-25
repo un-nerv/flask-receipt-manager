@@ -16,3 +16,6 @@ curl -sSL https://get.docker.com | sh
 sudo usermod -aG docker $(whoami)
 exit
 ```
+
+5. Run the command below to start server
+6. Go to http://localhost:5001
