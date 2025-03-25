@@ -6,4 +6,43 @@
     "store_name": "駅弁屋 旨囲門",
     "date": "2025-02-05",
     "total_amount": 1285
+}{
+  "store_name": "ファッションセンター しまむら江戸川台店",
+  "date": "2025-02-03",
+  "total_amount": 1089
+}{
+    "store_name": "駅弁屋 旨囲門",
+    "date": "2025-02-05",
+    "time": "11:33",
+    "total_amount": 1285
+}{
+    "store_name": "ファッションセンター しまむら 江戸川台店",
+    "date": "2025-02-03",
+    "time": "16:46",
+    "total_amount": 1089
+}{
+    "store_name": "ファッションセンター しまむら 江戸川台店",
+    "date": "2025-02-03",
+    "time": null,
+    "total_amount": 1089
+}{
+    "store_name": "ファッションセンター しまむら江戸川台店",
+    "date": "2025-02-03",
+    "time": null,
+    "total_amount": 1089
+}{
+    "store_name": "ファッションセンター しまむら 江戸川台店",
+    "date": "2025-02-03",
+    "time": null,
+    "total_amount": 1089
+}{
+  "store_name": "ファッションセンター しまむら 江戸川台店",
+  "date": "2025-02-03",
+  "time": null,
+  "total_amount": 1089
+}{
+    "store_name": "ファッションセンター しまむら 江戸川台店",
+    "date": "2025-02-03",
+    "time": null,
+    "total_amount": 1089
 }

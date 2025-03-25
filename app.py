@@ -39,6 +39,7 @@ def init_db():
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         store_name TEXT NOT NULL,
         date TEXT NOT NULL,
+        time TEXT,
         total_amount REAL NOT NULL
     )
     """)
@@ -107,11 +108,13 @@ def upload_file():
     response = client.models.generate_content(
         model="gemini-2.0-flash",
         contents=["""レシートに書いてあることを以下のjsonフォーマットで教えてください。
-                  以下がjsonのフォーマットの例です。指定された要素以外は含めないでください。また、店名は省略せず全て含めてください。
+                  以下がjsonのフォーマットの例です。指定された要素以外は含めないでください。
                   必ず以下のフォーマットに従い、"{"で始めて、"}"で閉じてください。
+                  また、店名は省略せず全て含め、チェーン店などで店名に地名が含まれている場合は、地名も店名に含めてください。
                     {
-                        "store_name": "スーパーA",
+                        "store_name": "スーパーA 新宿店",
                         "date": "2022-01-01",
+                        "time": "19:34",
                         "total_amount": 1000
                     }
                   
@@ -128,15 +131,21 @@ def upload_file():
 
     data_dict = json.loads(response.text)
     print(data_dict)
+    
     # データベースにデータを保存
     conn = sqlite3.connect("receipts.db")
     cursor = conn.cursor()
     cursor.execute("""
-    INSERT INTO receipts (store_name, date, total_amount)
-    VALUES (?, ?, ?)
-    """, (data_dict["store_name"], data_dict["date"], data_dict["total_amount"]))
+    INSERT INTO receipts (store_name, date, time, total_amount)
+    VALUES (?, ?, ?, ?)
+    """, (
+        data_dict.get("store_name", None), 
+        data_dict.get("date", None), 
+        data_dict.get("time", "00:00"), 
+        data_dict.get("total_amount", None)
+    ))
     conn.commit()
-    conn.close
+    conn.close()
 
     flash(response.text)
     return redirect(url_for('home'))

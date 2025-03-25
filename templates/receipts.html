@@ -10,6 +10,7 @@
             <th>ID</th>
             <th>Store Name</th>
             <th>Date</th>
+            <th>Time</th>
             <th>Total Amount</th>
         </tr>
         {% for receipt in receipts %}
@@ -18,6 +19,7 @@
             <td>{{ receipt[1] }}</td>
             <td>{{ receipt[2] }}</td>
             <td>{{ receipt[3] }}</td>
+            <td>{{ receipt[4] }}</td>
         </tr>
         {% endfor %}
     </table>

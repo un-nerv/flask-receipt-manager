@@ -1,1 +1,1 @@
-# This is start of my journey
+# This is Most powerfull Receipt manager powered by AI
