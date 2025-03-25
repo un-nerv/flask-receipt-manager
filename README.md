@@ -8,13 +8,14 @@
 - delete/insert data manualy
 
 # Install guide
-1. Create .env
-2. Go to https://aistudio.google.com/ and get API key
-3. Enter your key to .env file
+1. Clone this repo
+2. Create .env
+3. Go to https://aistudio.google.com/ and get API key
+4. Enter your key to .env file
     ```
     GEMINI_API_KEY=Enter_Your_API_KEY_HERE
     ```
-4. Install Docker
+5. Install Docker
 
     You can use Docker official script on Ubuntu
     ```
@@ -24,7 +25,7 @@
     exit
     ```
 
-5. Run the command below to start server
+6. Run the command below to start server
 
     ```
     docker compose up --build
