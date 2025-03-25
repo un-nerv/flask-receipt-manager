@@ -3,7 +3,7 @@
 # Install guide
 1. Create .env
 2. Go to https://aistudio.google.com/ and get API key
-3. Enter your key like this
+3. Enter your key to .env file
 ```
 GEMINI_API_KEY=Enter_Your_API_KEY_HERE
 ```
