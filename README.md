@@ -1,4 +1,4 @@
-# This is Most powerfull Receipt manager powered by AI
+# Most powerfull selfhostable Receipt manager powered by AI
 ⚠️This manager app is under development!!!
 
  Use at your own risk!!!
@@ -34,3 +34,4 @@
 ### Features will be supported
 - Geocoding store location and send to [Dawarich](https://github.com/Freika/dawarich)
 - Mobile app (It would be PWA)
+- Support for local AI
