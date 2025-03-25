@@ -32,7 +32,7 @@
     ```
 7. Go to http://localhost:5001
 
-# Features will be supported
+# Features to be supported
 - Geocoding store location and send to [Dawarich](https://github.com/Freika/dawarich)
 - Mobile app (It would be PWA)
 - Support for local AI
