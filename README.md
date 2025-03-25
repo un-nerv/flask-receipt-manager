@@ -7,3 +7,10 @@
 ```
 GEMINI_API_KEY=Enter_Your_API_KEY_HERE
 ```
+4. Install Docker
+    You can use Docker official script on Ubuntu
+```
+curl -sSL https://get.docker.com | sh
+sudo usermod -aG docker $(whoami)
+exit
+```
