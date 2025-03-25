@@ -1,11 +1,8 @@
 from flask import Flask, request, render_template, redirect, url_for, send_from_directory, flash
-import os
+import os, base64, sqlite3, json
 from google import genai
 from google.genai import types
 from werkzeug.utils import secure_filename
-import base64
-import sqlite3
-import json
 
 
 #google api keyの設定
