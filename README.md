@@ -18,4 +18,8 @@ exit
 ```
 
 5. Run the command below to start server
-6. Go to http://localhost:5001
+
+    ```
+    docker compose up --build
+    ```
+7. Go to http://localhost:5001
