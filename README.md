@@ -7,6 +7,7 @@ Use at your own risk!!!
 - Input data from image files
 - Delete/insert data manually
 - get data from google maps
+- Send store location to [Dawarich](https://github.com/Freika/dawarich)
 
 # Install guide
 1. Clone this repo
@@ -33,6 +34,5 @@ Use at your own risk!!!
 7. Go to http://localhost:5001
 
 # Planned Features
-- Geocoding store location and send to [Dawarich](https://github.com/Freika/dawarich)
 - Mobile app (It would be PWA)
 - Support for local AI
