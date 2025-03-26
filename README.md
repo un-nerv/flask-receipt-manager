@@ -6,6 +6,7 @@ Use at your own risk!!!
 ### Key features
 - Input data from image files
 - Delete/insert data manually
+- get data from google maps
 
 # Install guide
 1. Clone this repo
