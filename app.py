@@ -1,8 +1,17 @@
 from flask import Flask, request, render_template, redirect, url_for, send_from_directory, flash
 import os, base64, sqlite3, json, requests
+
+# geminiのクライアントをインポート
 from google import genai
 from google.genai import types
+
+# ファイル名の安全性を確保するための関数
 from werkzeug.utils import secure_filename
+
+#unix時間を取得するためのモジュール
+from datetime import datetime
+
+import dawarich
 
 
 #google api keyの設定
@@ -123,7 +132,7 @@ def upload_file():
                         "phone_number": "0123456789",
                         "address": "東京都新宿区西新宿1-1-1",
                         "date": "2022-01-01",
-                        "time": "19:34",
+                        "time": "19:34:00",
                         "total_amount": 1000
                         
                     }
@@ -153,24 +162,64 @@ def upload_file():
         data_dict.get("phone_number", None),
         data_dict.get("address", None),
         data_dict.get("date", None), 
-        data_dict.get("time", "00:00"), 
+        data_dict.get("time", "00:00:00") or "00:00:00", # 時刻がない場合は 00:00:00 とする
         data_dict.get("total_amount", None)
     ))
     conn.commit()
     conn.close()
 
-       # google map apiにアクセス
+    # google map apiにアクセス
     if not MAPS_API_KEY:
         raise ValueError("Google Maps API key is not set. Please check your environment variables.")
     
     API_ENDPOINT = f"https://maps.googleapis.com/maps/api/place/textsearch/json?query={data_dict.get('phone_number', '')}+{data_dict.get('store_name', '')}&key={MAPS_API_KEY}"
     result = requests.get(API_ENDPOINT)
+
+    point_dict = json.loads(result.text)
+
+
     
     # レスポンスをデバッグ用に表示
     print("Google Maps API Response:", result.text)
 
+
+    
+    # Google Maps APIのレスポンスをパース
+    point_dict = json.loads(result.text)
+
+    # 経度と緯度を取得
+    if point_dict.get("status") == "OK" and point_dict.get("results"):
+        location = point_dict["results"][0]["geometry"]["location"]
+        lon = location["lng"]  # 経度
+        lat = location["lat"]  # 緯度
+        print(f"Longitude: {lon}, Latitude: {lat}")
+    else:
+        lon = None
+        lat = None
+        print("Failed to retrieve location data from Google Maps API.")
+
+    # UNIX時間に整形
+    date_str= data_dict.get("date", None) + " " + data_dict.get("time", "00:00:00")
+    date_obj = datetime.strptime(date_str, "%Y-%m-%d %H:%M:%S")
+    unix_time = int(date_obj.timestamp())
+
+
+    # 位置情報送信を行うかどうかのフラグ
+    data_send = False
+
+
+    if lon is not None and lat is not None and data_send == True:
+        # 位置情報をdawarichに送信
+        dawarich.send_location(lat, lon, unix_time)
+        print(f"Sending location to Dawarich: Longitude={lon}, Latitude={lat}")
+        
+
+    # フラッシュメッセージを表示
+    debugging_message = f"Dawarich location send\n Longitude: {lon}, Latitude: {lat}\n date_time: {date_str}\n unix_time: {unix_time}"
+    flash(debugging_message)
     flash(response.text)
     flash(result.text)
+    
 
 
     return redirect(url_for('home'))
@@ -182,7 +231,7 @@ def uploaded_file(filename):
 @app.route('/delete/<filename>')
 def delete_file(filename):
     #画像削除
-    safe_filename = secure_filename(filename)#相対パスによる悪意のあるファイル削除から保護
+    safe_filename = secure_filename(filename) #相対パスによる悪意のあるファイル削除から保護
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], safe_filename)
     try:
         os.remove(file_path)

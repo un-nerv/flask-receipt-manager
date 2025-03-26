@@ -137,4 +137,46 @@
     "date": "2024-12-14",
     "time": "16:12",
     "total_amount": 15980
+}{
+    "store_name": "RAWR hair McQueen",
+    "phone_number": "0471701922",
+    "address": "千葉県流山市おおたかの森西1-8-5ラフィーヌおおたかの森102",
+    "date": "2025-01-08",
+    "time": "10:40:37",
+    "total_amount": 4000
+}{
+    "store_name": "RAWR hair McQueen",
+    "phone_number": "0471701922",
+    "address": "千葉県流山市おおたかの森西1-8-5ラフィーヌおおたかの森102",
+    "date": "2025-01-08",
+    "time": "10:40:37",
+    "total_amount": 4000
+}{
+    "store_name": "ホテルアスペン志賀",
+    "phone_number": "0269343700",
+    "address": null,
+    "date": "2025-03-10",
+    "time": "12:01:00",
+    "total_amount": 650
+}{
+    "store_name": "ホテルアスペン志賀",
+    "phone_number": "0269343700",
+    "address": null,
+    "date": "2025-03-10",
+    "time": "12:01:00",
+    "total_amount": 650
+}{
+    "store_name": "レストランアスペン",
+    "phone_number": "0269343700",
+    "address": null,
+    "date": "2025-03-10",
+    "time": "12:01:00",
+    "total_amount": 650
+}{
+    "store_name": "ホテルアスペン志賀",
+    "phone_number": "0269343700",
+    "address": null,
+    "date": "2025-03-10",
+    "time": "12:01:00",
+    "total_amount": 650
 }

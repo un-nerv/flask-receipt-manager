@@ -11,4 +11,6 @@ services:
     environment:
       - GOOGLE_GEMINI_API_KEY
       - GOOGLE_MAPS_API_KEY
+      - DAWARICH_API_KEY
+      - DAWARICH_URL
       
