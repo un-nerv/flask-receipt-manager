@@ -1,13 +1,17 @@
 from flask import Flask, request, render_template, redirect, url_for, send_from_directory, flash
-import os, base64, sqlite3, json
+import os, base64, sqlite3, json, requests
 from google import genai
 from google.genai import types
 from werkzeug.utils import secure_filename
 
 
 #google api keyの設定
-GOOGLE_API_KEY = os.getenv('GEMINI_API_KEY')
-client = genai.Client(api_key=GOOGLE_API_KEY)
+GEMINI_API_KEY = os.getenv('GOOGLE_GEMINI_API_KEY')
+MAPS_API_KEY = os.getenv('GOOGLE_MAPS_API_KEY')
+
+client = genai.Client(api_key=GEMINI_API_KEY)
+
+print(GEMINI_API_KEY)
 
 app = Flask(__name__)
 
@@ -35,6 +39,8 @@ def init_db():
     CREATE TABLE IF NOT EXISTS receipts (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         store_name TEXT NOT NULL,
+        phone_number TEXT,
+        address TEXT,
         date TEXT NOT NULL,
         time TEXT,
         total_amount REAL NOT NULL
@@ -45,6 +51,7 @@ def init_db():
 
 init_db()
 
+# 手動でレシートを追加するエンドポイント
 @app.route("/add", methods=["POST"])
 def add_receipt():
     store_name = request.form["store_name"]
@@ -55,8 +62,8 @@ def add_receipt():
     conn = sqlite3.connect("receipts.db")
     cursor = conn.cursor()
     cursor.execute("""
-    INSERT INTO receipts (store_name, date, total_amount)
-    VALUES (?, ?, ?)
+    INSERT INTO receipts (store_name, phone_number, address, date, total_amount)
+    VALUES (?, ?, ?, ?, ?)
     """, (store_name, date, total_amount))
     conn.commit()
     conn.close()
@@ -101,6 +108,8 @@ def upload_file():
     with open(file_path, "rb") as f:
         image_bytes = f.read()
 
+
+
     #geminiにデータを送信
     response = client.models.generate_content(
         model="gemini-2.0-flash",
@@ -108,11 +117,15 @@ def upload_file():
                   以下がjsonのフォーマットの例です。指定された要素以外は含めないでください。
                   必ず以下のフォーマットに従い、"{"で始めて、"}"で閉じてください。
                   また、店名は省略せず全て含め、チェーン店などで店名に地名が含まれている場合は、地名も店名に含めてください。
+                  電話番号が二つある場合は店舗用の番号を採用して一つだけ返答してください。電話番号にはハイフンを含めないでください。
                     {
                         "store_name": "スーパーA 新宿店",
+                        "phone_number": "0123456789",
+                        "address": "東京都新宿区西新宿1-1-1",
                         "date": "2022-01-01",
                         "time": "19:34",
                         "total_amount": 1000
+                        
                     }
                   
                   """,
@@ -133,10 +146,12 @@ def upload_file():
     conn = sqlite3.connect("receipts.db")
     cursor = conn.cursor()
     cursor.execute("""
-    INSERT INTO receipts (store_name, date, time, total_amount)
-    VALUES (?, ?, ?, ?)
+    INSERT INTO receipts (store_name, phone_number, address, date, time, total_amount)
+    VALUES (?, ?, ?, ?, ?, ?)
     """, (
-        data_dict.get("store_name", None), 
+        data_dict.get("store_name", None),
+        data_dict.get("phone_number", None),
+        data_dict.get("address", None),
         data_dict.get("date", None), 
         data_dict.get("time", "00:00"), 
         data_dict.get("total_amount", None)
@@ -144,7 +159,20 @@ def upload_file():
     conn.commit()
     conn.close()
 
+       # google map apiにアクセス
+    if not MAPS_API_KEY:
+        raise ValueError("Google Maps API key is not set. Please check your environment variables.")
+    
+    API_ENDPOINT = f"https://maps.googleapis.com/maps/api/place/textsearch/json?query={data_dict.get('phone_number', '')}+{data_dict.get('store_name', '')}&key={MAPS_API_KEY}"
+    result = requests.get(API_ENDPOINT)
+    
+    # レスポンスをデバッグ用に表示
+    print("Google Maps API Response:", result.text)
+
     flash(response.text)
+    flash(result.text)
+
+
     return redirect(url_for('home'))
 
 @app.route('/uploads/<filename>')
@@ -172,6 +200,7 @@ def get_receipts():
     conn.close()
     return receipts
 
+# レシート一覧を表示するエンドポイント
 @app.route('/receipts')
 def show_receipts():
     receipts = get_receipts()

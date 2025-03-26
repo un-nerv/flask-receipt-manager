@@ -9,5 +9,6 @@ services:
       - /app/__pycache__/
       - ./logs:/logs
     environment:
-      - GEMINI_API_KEY
+      - GOOGLE_GEMINI_API_KEY
+      - GOOGLE_MAPS_API_KEY
       

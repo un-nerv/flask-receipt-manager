@@ -45,4 +45,96 @@
     "date": "2025-02-03",
     "time": null,
     "total_amount": 1089
+}{
+    "store_name": "志賀高原山の駅売店",
+    "date": "2025-02-25",
+    "time": "16:35",
+    "total_amount": 432
+}{
+    "store_name": "漬物老舗高橋",
+    "date": "2025-03-10",
+    "time": "15:41",
+    "total_amount": 1123
+}{
+    "store_name": "RAWR hair McQueen",
+    "date": "2025-01-08",
+    "time": "10:40",
+    "total_amount": 4000
+}{
+    "store_name": "RAWR hair McQueen",
+    "phone_number": "047-170-1922",
+    "address": "千葉県流山市おおたかの森西1-8-5ラフィーヌおおたかの森102",
+    "date": "2025-01-08",
+    "time": "10:40",
+    "total_amount": 4000
+}{
+    "store_name": "RAWR hair McQueen",
+    "phone_number": "047-170-1922",
+    "address": "千葉県流山市おおたかの森西1-8-5ラフィーヌおおたかの森102",
+    "date": "2025-01-08",
+    "time": "10:40",
+    "total_amount": 4000
+}{
+    "store_name": "RAWR hair McQueen",
+    "phone_number": "047-170-1922",
+    "address": "千葉県流山市おおたかの森西1-8-5ラフィーヌおおたかの森102",
+    "date": "2025-01-08",
+    "time": "10:40",
+    "total_amount": 4000
+}{
+    "store_name": "RAWR hair McQueen",
+    "phone_number": "047-170-1922",
+    "address": "千葉県流山市おおたかの森西1-8-5ラフィーヌおおたかの森102",
+    "date": "2025-01-08",
+    "time": "10:40",
+    "total_amount": 4000
+}{
+    "store_name": "ファッションセンター しまむら江戸川台店",
+    "phone_number": "04-7140-5050",
+    "address": null,
+    "date": "2025-02-03",
+    "time": "16:46",
+    "total_amount": 1089
+}{
+    "store_name": "RAWR hair McQueen",
+    "phone_number": "0471701922",
+    "address": "千葉県流山市おおたかの森西1-8-5ラフィーヌおおたかの森102",
+    "date": "2025-01-08",
+    "time": "10:40",
+    "total_amount": 4000
+}{
+    "store_name": "RAWR hair McQueen",
+    "phone_number": "0471701922",
+    "address": "千葉県流山市おおたかの森西1-8-5ラフィーヌおおたかの森102",
+    "date": "2025-01-08",
+    "time": "10:40",
+    "total_amount": 4000
+}{
+    "store_name": "RAWR hair McQueen",
+    "phone_number": "0471701922",
+    "address": "千葉県流山市おおたかの森西1-8-5ラフィーヌおおたかの森102",
+    "date": "2025-01-08",
+    "time": "10:40",
+    "total_amount": 4000
+}{
+    "store_name": "レストランアスペン",
+    "phone_number": "0269343700",
+    "address": null,
+    "date": "2025-03-10",
+    "time": "12:01",
+    "total_amount": 650
+}{
+    "store_name": "ファッションセンター しまむら江戸川台店",
+    "phone_number": "0471405050",
+    "address": null,
+    "date": "2025-02-03",
+    "time": null,
+    "total_amount": 1089
+}{
+    "store_name": "パソコン工房 秋葉原パーツ館",
+    "phone_number": "0335263571",
+    "address": "日本橋4-16-1",
+    "date": "2024-12-14",
+    "time": "16:12",
+    "total_amount": 15980
 }
